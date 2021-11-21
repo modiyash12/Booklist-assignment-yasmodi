@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Home</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-sm-12">
+                <div class="card" style="width: 35rem;">
+                    <img src="https://media.wired.com/photos/5be4cd03db23f3775e466767/master/pass/books-521812297.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h1 class="card-title">MY_BOOK_APP</h1>
+                      <p class="card-text">A book is a medium for recording information in the form of writing or images</p>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-6 col-sm-12">
+                <div class="card2" style="width: 35rem;">
+                    <div class="card-body">
+                      <h1 class="card-title">Enter Book Details</h1>
+                            <form class="form" action="" method="POST" id="formvalue">
+
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                      <label  class="form-label">ID</label>
+                                      <input type="text" class="form-control" placeholder="Enter id" name="id" id="id">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                      <label  class="form-label">Book Name</label>
+                                      <input type="text" class="form-control" placeholder="book name" name="bookname" id="bookname">
+                                    </div>
+                                </div>
+          
+                                <div class="row">
+                                  <div class="col-lg-9">
+                                    <label  class="form-label">Author Name</label>
+                                    <input type="text" class="form-control" placeholder="Author name" name="authorname" id="authorname">
+                                  </div>
+                                </div>
+
+                                <div class="row">
+                                  <div class="col-lg-9">
+                                    <label  class="form-label">ISSUE_DATE</label>
+                                    <input type="date" class="form-control" placeholder="issue name" name="issuedate" id="issuedate">
+                                  </div>
+                                </div>
+          
+
+          
+                                <div class="row">
+                                  <div class="col-lg-9">
+                                      <div class="submit">
+                                        <input type="submit" value="Add_Book" >
+                                      </div>
+                                   </div>
+                                </div>
+
+                            </form>
+
+                            <div class="row justify-content-center" style="margin-left: 5px; padding-top: 3px;">
+                              <div class="col-lg-3">
+                                  <div class="submit">
+                                    <button type="submit" class="btn btn-secondary" onclick="updatebook()">Update</button>
+                                  </div>
+                               </div>
+
+                               <div class="col-lg-3">
+                                <div class="submit">
+                                  <button class="btn btn-info" onclick="getbookdata()">Books</button>
+                                </div>
+                             </div>
+
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+
+            
+            <div class="row justify-content-center">
+              <h1>My_Book_List</h1>
+              <div class="table">
+              <div class="col-lg-12">
+                <table class="table table-bordered" id="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">BOOK_NAME</th>
+                      <th scope="col">AUTHOR_NAME</th>
+                      <th scope="col">ISSUE_DATE</th>
+                      <th scope="col">ACTION</th>
+                    </tr>
+                  </thead>     
+                  <tbody id="booklist">
+                  </tbody>
+               </table>
+              </div>
+            </div>
+           </div>
+
+
+           <div class="row justify-content-center" >
+
+           <div class="col-lg-4" style="padding-top: 10px;">
+            <input type="text" name="ids" id="ids" placeholder="Please Enter id for search" style="color: chocolate; padding-left: 10px;">
+            <button type="submit" class="btn btn-primary"  onclick="getdataid()">Search</button>
+         </div>
+          </div>
+           
+
+              
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="app.js"></script>
+</body>
+</html>
