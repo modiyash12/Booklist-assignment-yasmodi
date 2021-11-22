@@ -35,7 +35,7 @@ app.get('/getbook',(req,res)=>{
 
 app.get('/getbook/:id',(req,res)=>{
 
-    let bookinfo= booksdetails.find(c=>{ return c.id === req.params.id});
+    let bookinfo= booksdetails.find(c=>{return (c.id ===req.params.id || c.bookname  ===req.params.id || c.authorname  ===req.params.id)});
     console.log(req.params.id);
     if(!bookinfo){
        console.log("data not found with this id")
