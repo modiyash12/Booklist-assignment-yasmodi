@@ -70,7 +70,7 @@
 
                             </form>
 
-                            <div class="row justify-content-center" style="margin-left: 5px; padding-top: 3px;">
+                            <div class="row justify-content-center" style="margin-left: 4px; padding-top: 3px;">
                               <div class="col-lg-3">
                                   <div class="submit">
                                     <button type="submit" class="btn btn-secondary" onclick="updatebook()">Update</button>
@@ -81,6 +81,14 @@
                                 <div class="submit">
                                   <button class="btn btn-info" onclick="getbookdata()">Books</button>
                                 </div>
+                              </div>
+
+                                <div class="col-lg-3">
+                                  <div class="submit">
+                                    <button class="btn btn-danger" onclick="deleteall()">Delete_all</button>
+                                  </div>
+                                </div>
+
                              </div>
 
                             </div>
@@ -103,6 +111,8 @@
                       <th scope="col">AUTHOR_NAME</th>
                       <th scope="col">ISSUE_DATE</th>
                       <th scope="col">ACTION</th>
+                      <th scope="col">ACTION</th>
+
                     </tr>
                   </thead>     
                   <tbody id="booklist">

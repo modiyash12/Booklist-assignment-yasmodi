@@ -1,5 +1,10 @@
 var mylist=[];
 
+// lengtharr=mylist.length;
+// last_id=mylist.id[lengtharr-1];
+// console.log(last_id);
+
+
 const myform = document.getElementById('formvalue')
 
 myform.addEventListener('submit',function(e){
@@ -16,12 +21,14 @@ myform.addEventListener('submit',function(e){
         return response.json()
     })
     .then(data=>{
-       // mylist=data;
         console.log("success")
-        displaydata(data);
-       //displaydata();
+        alert("book added successfully")
+        getbookdata();
         resetvalue();
-    })
+    }) .catch(function (error) {
+     alert("book with same id exists");
+     resetvalue();
+    });
    
 })
 
@@ -54,7 +61,10 @@ function getbookdata(){
         <td>${book.bookname}</td>
         <td>${book.authorname}</td>
         <td>${book.issuedate}</td>
-        <td><button class="danger" onclick="deletebook(${book.id})">DELETE</button></td>`;
+        <td><button class="btn btn-danger" onclick="deletebook(${book.id})">DELETE</button></td>
+       <td><button class="btn btn-secondary" onclick="update(${book.id})">Update</button></td>`;
+
+
      list.appendChild(row);
   }
 
@@ -68,7 +78,8 @@ function getbookdata(){
         return response.json();
       }) .then(data => {
         console.log('Success:', data);
-        displaydata(data);
+        alert("book deleted successfully")
+        getbookdata();
       })
       .then(()=> {
         console.log("data deleted");
@@ -92,15 +103,16 @@ function getbookdata(){
     })
       .then(data => {
         console.log('Success:', data);
-        displaydata(data);
+        alert("book updated successfully");
+        getbookdata();
       })
       .catch((error) => {
+        alert("book not found");
         console.error('Error:', error);
       });
    }
   
    function getdataid(){
-       console.log("jj")
         var a = document.getElementById('ids').value;
         console.log(a);
         const option={
@@ -115,9 +127,28 @@ function getbookdata(){
         displaydata(myJson);
     })
     .catch(function (error) {
+      alert("Data not matched")
       console.log("Error: " + error);
     });
 
+   }
+
+
+   function deleteall(){
+    const option={
+      method: 'DELETE',
+  }
+     fetch('http://localhost:8080/delete',option)  
+     .then(function (response) {
+      return response.json();
+    }) .then(data => {
+      console.log('Success:', data);
+      alert("All book deleted successfully")
+      getbookdata();
+    })
+    .then(()=> {
+      console.log("data deleted");
+    })
    }
   
 
@@ -146,4 +177,32 @@ function deletetabledata() {
     for (var i = rowCount - 1; i > 0; i--) {
         table.deleteRow(i);
     }
+  }
+
+  function update(id){
+    const option={
+      method:'GET'
+  }
+    console.log(id);
+
+    var response=fetch(`http://localhost:8080/getbook/${id}`,option)
+    .then(function (response) {
+    return response.json();
+  })
+  .then(function (myJson) {
+      deletetabledata();
+      console.log(myJson);
+
+
+      document.querySelector('#id').value=myJson.id;
+      document.querySelector('#bookname').value=myJson.bookname;
+      document.querySelector('#authorname').value=myJson.authorname;
+      document.querySelector('#issuedate').value=myJson.issuedate;
+  })
+  .catch(function (error) {
+    alert("Data not matched")
+    console.log("Error: " + error);
+  });
+
+   
   }
