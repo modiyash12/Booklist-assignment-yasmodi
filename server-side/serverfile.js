@@ -19,11 +19,17 @@ app.get('/',(req,res)=>{
 app.post('/addbook',(req,res)=>{
    // console.log(req.body);
     var bookdata = req.body;
-    booksdetails.push(bookdata);
-    var jdata = JSON.stringify(booksdetails);
-    //adding data into file
-        fs.writeFileSync('data.json', jdata) 
-         res.send(booksdetails);        
+    let check= booksdetails.find(e=>{return e.id===req.body.id});
+    if(!check){
+        booksdetails.push(bookdata);
+        var jdata = JSON.stringify(booksdetails);
+        //adding data into file
+            fs.writeFileSync('data.json', jdata) 
+             res.send(booksdetails);    
+    }else{
+        res.send("")
+    }
+      
 })
 
 app.get('/getbook',(req,res)=>{
@@ -34,12 +40,18 @@ app.get('/getbook',(req,res)=>{
 
 
 app.get('/getbook/:id',(req,res)=>{
+         lower_id=req.params.id.toLowerCase();
+         upper_id=req.params.id.toUpperCase();
 
-    let bookinfo= booksdetails.find(c=>{return (c.id ===req.params.id || c.bookname  ===req.params.id || c.authorname  ===req.params.id)});
+
+
+    let bookinfo= booksdetails.find(c=>{ return (c.id ===req.params.id || c.bookname  ===req.params.id || c.bookname===lower_id ||c.bookname===upper_id ||c.authorname===upper_id ||c.authorname===lower_id ||c.authorname  ===req.params.id)});
     console.log(req.params.id);
     if(!bookinfo){
        console.log("data not found with this id")
+       res.send("")
     }else{
+        console.log(bookinfo);
         res.send(bookinfo);
     }
  })
@@ -57,7 +69,19 @@ app.delete('/delete/:id',(req,res)=>{
     }
    })
 
-
+   app.delete('/delete',(req,res)=>{
+       let l=booksdetails.length;
+       console.log(l);
+       if(l>0){
+           booksdetails.splice(0,l);
+           var jdata = JSON.stringify(booksdetails);
+           fs.writeFileSync('data.json', jdata);
+           res.send(booksdetails);
+       }else{
+           console.log("no books found");
+           res.send("");
+       }
+   })
 
    
  app.put('/updatebooks/',(req,res)=>{
@@ -77,7 +101,8 @@ app.delete('/delete/:id',(req,res)=>{
        fs.writeFileSync('data.json',data);
        res.send(booksdetails);
     }else{
-       console.log("data not present")
+        res.send("");
+      // console.log("data not present")
     }
 })
 
